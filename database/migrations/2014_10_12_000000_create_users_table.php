@@ -15,12 +15,21 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->bigIncrements('user_id');
+            $table->string('user_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('gender');
             $table->rememberToken();
-            $table->timestamps();
+            $table->softDeletes();
+            /**
+            *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
+            */
+            $table->bigIncrements('created_user_id')->references('id')->users;
+            $table->timestamps('created_at');
+            $table->bigIncrements('updated_user_id')->references('id')->users;
+            $table->timestamps('updated_at');
         });
     }
 

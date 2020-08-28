@@ -12,9 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('top');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/user/delete', function() {
+  User::find(1)->delete();
+});
+
+Route::get('/posts', 'PostController');
+
+Route::get('/postcomments', 'PostCommentController');
