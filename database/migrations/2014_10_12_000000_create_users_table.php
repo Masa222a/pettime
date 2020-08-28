@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('gender');
             $table->rememberToken();
-            $table->softDeletes();
+            // $table->softDeletes();
             /**
             *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
             */

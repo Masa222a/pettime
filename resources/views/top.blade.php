@@ -44,7 +44,7 @@
                 <h6>新着ブロック</h6>
             </div>
             
-<!-- 投稿された新着記事が入る -->
+    <!-- 投稿された新着記事が入る -->
             <div class="row">
                 <table class="table col-md-10 box-table">
                     <tr>
@@ -62,19 +62,23 @@
                 </table>
             </div>
         </div>
+        
+    <!-- ログイン時のみアカウントメニュー -->
+    @auth
         <div class="box-account col-md-2 order-md-2 mx-auto ml-md-auto">
             <div class="row">
                 <div class=" mx-auto">
                         <img src="#" class="mt-5" height="130px" width="120px">
                         <div class="list-group text-center">
-                            <p class="mt-3">アカウント名</p>
+                            <p class="mt-3">{{ Auth::user()->name }}さん</p>
                             <p><a href="#">ペット一覧</a></p>
                             <p><a href="#">プロフィール編集</a></p>
                             <p><a href="#">アカウント削除</a></p>
+                        </div>
                 </div>
             </div>
         </div>
-    </div>
+    @endauth
 </div>
 
 @endsection
