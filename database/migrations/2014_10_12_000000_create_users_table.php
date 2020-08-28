@@ -26,9 +26,9 @@ class CreateUsersTable extends Migration
             /**
             *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
             */
-            $table->bigIncrements('created_user_id')->references('id')->users;
+            $table->string('created_user_name');
             $table->timestamps('created_at');
-            $table->bigIncrements('updated_user_id')->references('id')->users;
+            $table->string('updated_user_name');
             $table->timestamps('updated_at');
         });
     }

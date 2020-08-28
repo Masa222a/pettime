@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('top');
-});
+Route::get('/', 'TopController@index');
 
 Auth::routes();
+
+Route::get('/account', 'AccountController@index');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

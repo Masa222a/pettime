@@ -23,9 +23,9 @@ class CreatePhotosTable extends Migration
             /**
             *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
             */
-            
+            $table->string('created_user_name');
             $table->timestamps('created_at');
-            
+            $table->string('updated_user_name');
             $table->timestamps('updated_at');
             
             
