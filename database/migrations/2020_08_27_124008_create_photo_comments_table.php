@@ -17,14 +17,11 @@ class CreatePhotoCommentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('photo_id');
-            $table->string('photo_comment');
-            /**
-            *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
-            */
+            $table->string('comment');
+
             $table->string('created_user_name');
-            $table->timestamps('created_at');
             $table->string('updated_user_name');
-            $table->timestamps('updated_at');
+            $table->timestamps();
             
             
             $table->foreign('user_id')->references('id')->on('users');

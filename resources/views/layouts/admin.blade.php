@@ -28,10 +28,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">　
             <li class="nav-item">
-              <a class="nav-link" href="/">トップページ</a>
+              <a class="nav-link" href="{{ url('/') }}">トップページ</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">掲示板</a>
+              <a class="nav-link" href="{{ url('/posts') }}">掲示板</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">写真投稿</a>

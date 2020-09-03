@@ -16,18 +16,13 @@ class CreatePetsTable extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->bigIncrements('pet_id');
-            $table->string('pet_name');
-            $table->string('pet_image');
-            $table->string('pet_type');
-            $table->string('pet_gender');
-            /**
-            *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
-            */
-            $table->string('created_user_name');
-            $table->timestamps('created_at');
-            $table->string('updated_user_name');
-            $table->timestamps('updated_at');
+            $table->string('name');
+            $table->string('image_path')->nullable();
+            $table->string('type');
+            $table->string('gender');
+
+            $table->timestamps();
+
             
             
             $table->foreign('user_id')->references('id')->on('users');

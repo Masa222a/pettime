@@ -63,7 +63,7 @@
             </div>
         </div>
         
-    <!-- ログイン時のみアカウントメニュー -->
+    <!-- ログイン時のみユーザー画面 -->
     @auth
         <div class="box-account col-md-2 order-md-2 mx-auto ml-md-auto">
             <div class="row">
@@ -71,9 +71,9 @@
                         <img src="#" class="mt-5" height="130px" width="120px">
                         <div class="list-group text-center">
                             <p class="mt-3">{{ Auth::user()->name }}さん</p>
-                            <p><a href="#">ペット一覧</a></p>
-                            <p><a href="#">プロフィール編集</a></p>
-                            <p><a href="#">アカウント削除</a></p>
+                            <p><a href="{{ url('/pet') }}">ペット一覧</a></p>
+                            <p><a href="{{ url('/user') }}">プロフィール編集</a></p>
+                            <p><a href="{{ action('UserController@delete') }}">アカウント削除</a></p>
                         </div>
                 </div>
             </div>

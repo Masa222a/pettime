@@ -12,7 +12,15 @@ class User extends Authenticatable
     use Notifiable;
     
     // use SoftDeletes;
+    
+    // protected $dates = ['deleted_at'];
 
+    public static $rules = array(
+        'name' => 'required',
+        'email' => 'required',
+        'gender' => 'required',
+    );
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -44,13 +52,15 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Post');
     }
-    
-    // public static function boot()
-    // {
-    //     parent::boot;
         
-    //     static::deleted(function ($user) {
-    //       $user->posts()->delete(); 
-    //     });
-    // }
+    public function pet()
+    {
+      return $this->hasMany('App\Pet');
+    }
+    
+    public function photo()
+    {
+      return $this->hasMany('App\Photo');
+    }
+    
 }

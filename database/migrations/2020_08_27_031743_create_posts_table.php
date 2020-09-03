@@ -16,18 +16,13 @@ class CreatePostsTable extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
-            $table->bigIncrements('post_id');
             $table->string('post_title');
             $table->string('post_body');
             $table->string('post_image');
-            /**
-            *  created_userとupdated_userのデータ型とは？、削除フラグの使い方
-            */
             
             $table->string('created_user_name');
-            $table->timestamps('created_at');
             $table->string('updated_user_name');
-            $table->timestamps('updated_at');
+            $table->timestamps();
             
             
             $table->foreign('user_id')->references('id')->on('users');

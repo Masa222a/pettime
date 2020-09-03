@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use App\User;
 
-class AccountController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $auth = Auth::user();
+        return view('user.index', [ 'auth' => $auth]);
     }
 
     /**
@@ -32,7 +36,7 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) { 
+    public function store() { 
       $user = new Users; 
       $user->username = $request->name; 
       $user->mail = $request->email; 
@@ -58,9 +62,14 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request)
     {
-        //
+        //User Modelからデータを取得
+        $user = User::find($request->id);
+        if (empty($user)) {
+          abort(404);
+        }
+        return view('user.edit', ['user_form' => $user]);
     }
 
     /**
@@ -70,9 +79,22 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //Validationをかける
+        $this->validate($request, User::$rules);
+        
+        //User Modelからデータを取得
+        $user = User::find($request->id);
+        
+        //送信されてきたフォームデータを格納する
+        $user_form = $request->all();
+        unset($user_form['_token']);
+        
+        //該当するデータを上書きして保存する
+        $user->fill($user_form)->save();
+        
+        return redirect('user');
     }
 
     /**
@@ -84,5 +106,12 @@ class AccountController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function delete(Request $request)
+    {
+        $user = User::find($request->id);
+        // $user->deleted_at = Carbon::now();
+        return redirect('/login');
     }
 }
