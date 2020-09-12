@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('updated_user_name')->nullable();
             $table->timestamps();
             
-            // $table->softDeletes();
+
         });
     }
 

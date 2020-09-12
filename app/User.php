@@ -5,20 +5,17 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-// use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class User extends Authenticatable
 {
     use Notifiable;
     
-    // use SoftDeletes;
-    
-    // protected $dates = ['deleted_at'];
 
     public static $rules = array(
         'name' => 'required',
         'email' => 'required',
-        'gender' => 'required',
+        'gender' => 'required|in:m,f,others',
     );
     
     /**
@@ -53,14 +50,14 @@ class User extends Authenticatable
         return $this->hasMany('App\Post');
     }
         
-    public function pet()
+    public function pets()
     {
-      return $this->hasMany('App\Pet');
+      return $this->hasMany('App\Pets');
     }
     
-    public function photo()
+    public function photos()
     {
-      return $this->hasMany('App\Photo');
+      return $this->hasMany('App\Photos');
     }
     
 }

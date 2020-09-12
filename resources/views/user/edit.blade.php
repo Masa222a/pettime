@@ -30,16 +30,24 @@
             </div>
             
             <div class="form-group row my-3">
-              <label class="col-md-2 col-form-label text-md-right" for="gender">性別</label>
-                <div class="col-md-9">
-                  <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
-                  @error('gender')
-                    <span class="invalid-feedback" role="alert">
-                      <strong>{{ $message }}</strong>
-                    </span>
-                  @enderror
+              <div class="col-md-9">
+                <div class="form-group row">
+                  <label for="gender" class="col-md-4 col-form-label text-center">性別</label>
+                  <div class="col-md-3">
+                    <select class="form-control my-1" name="gender" id="gender">
+                      <option value="m">男性</option>
+                      <option value="f">女性</option>
+                      <option value="others">その他</option>
+                    </select>
+                  </div>
                 </div>
-            </div>
+                @error('gender')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                @enderror
+              </div>
+          </div>
             
             <div class="form-group row my-3">
               <label class="col-md-3 col-form-label text-md-left ml-2" for="email">メールアドレス</label>

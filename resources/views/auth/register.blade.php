@@ -28,18 +28,16 @@
                         </div>
                         
                         <div class="form-group row">
-                            <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('messages.Gender') }}</label>
-
-                            <div class="col-md-4">
-                                <input id="gender" type="text" class="form-control @error('gender') is-invalid @enderror" name="gender" value="{{ old('gender') }}" required autocomplete="gender" autofocus>
-
-                                @error('gender')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+                          <label for="gender" class="col-md-4 col-form-label text-md-right">{{ __('messages.Gender') }}</label>
+                          <div class="col-md-2">
+                            <select class="form-control" name="gender" id="gender">
+                              <option value="m">男性</option>
+                              <option value="f">女性</option>
+                              <option value="others">その他</option>
+                            </select>
+                          </div>
                         </div>
+
 
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('messages.E-Mail Address') }}</label>

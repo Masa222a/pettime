@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use App\User;
+use Auth;
 
 class PostController extends Controller
 {
@@ -13,7 +16,14 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        return view('posts.index');
+        $posts = Post::all();
+        
+        return view('posts.index', ['posts' => $posts]);
+    }
+    
+    public function add()
+    {
+        return view('posts.create');
     }
 
     /**
@@ -21,20 +31,20 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+        $this->validate($request, Post::$rules);
+        
+        $post = new Post;
+        $form = $request->all();
+        
+        unset($form['_token']);
+        
+        $post->fill($form);
+        $post->user_id = Auth::id();
+        $post->save();
+        
+        return redirect('/posts');
     }
 
     /**

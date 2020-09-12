@@ -73,7 +73,8 @@
                             <p class="mt-3">{{ Auth::user()->name }}さん</p>
                             <p><a href="{{ url('/pet') }}">ペット一覧</a></p>
                             <p><a href="{{ url('/user') }}">プロフィール編集</a></p>
-                            <p><a href="{{ action('UserController@delete') }}">アカウント削除</a></p>
+                            {{-- hrefの引数で検索 --}}
+                            <p><a href="{{ action('UserController@delete', Auth::user()->id) }}">アカウント削除</a></p>
                         </div>
                 </div>
             </div>

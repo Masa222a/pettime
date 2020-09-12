@@ -11,7 +11,7 @@ class Pet extends Model
     public static $rules = array(
       'name' => 'required',
       'type' => 'required',
-      'gender' => 'required',
+      'gender' => 'required|in:m,f,others',
       );
 
 }

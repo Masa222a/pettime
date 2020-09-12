@@ -17,11 +17,9 @@ class CreatePhotosTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('pet_id');
-            $table->string('name');
             $table->string('body');
+            $table->string('image_path');
 
-            $table->string('created_user_name');
-            $table->string('updated_user_name');
             $table->timestamps();
             
             

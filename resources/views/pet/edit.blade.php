@@ -36,8 +36,12 @@
 
                       <div class="form-group row">
                         <label for="type" class="col-md-4 col-form-label text-md-right">性別</label>
-                        <div class="col-md-6">
-                          <input type="text" class="form-control" name="gender" value="{{ $pet_form->gender }}">
+                        <div class="col-md-2">
+                          <select class="form-control" name="gender" id="gender">
+                            <option value="m">オス</option>
+                            <option value="f">メス</option>
+                            <option value="others">その他</option>
+                          </select>
                         </div>
                       </div>
 

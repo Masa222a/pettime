@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\User;
+use App\Pet;
 
 class UserController extends Controller
 {
@@ -108,10 +109,15 @@ class UserController extends Controller
         //
     }
     
-    public function delete(Request $request)
+    public function delete($id)
     {
-        $user = User::find($request->id);
-        // $user->deleted_at = Carbon::now();
+        //紐づいているテーブル取得後、削除
+        $user = User::find($id);
+
+
+        
+        $user->delete();
+        
         return redirect('/login');
     }
 }

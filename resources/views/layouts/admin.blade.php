@@ -34,7 +34,7 @@
               <a class="nav-link" href="{{ url('/posts') }}">掲示板</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">写真投稿</a>
+              <a class="nav-link" href="{{ url('/photo') }}">写真投稿</a>
             </li>
           </ul>
           <ul class="navbar-nav">

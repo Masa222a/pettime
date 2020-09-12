@@ -20,6 +20,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th width="10%">ID</th>
+                                <th width="10%">USER_ID</th>
                                 <th width="20%">名前</th>
                                 <th width="20%">種類</th>
                                 <th width="20%">性別</th>
