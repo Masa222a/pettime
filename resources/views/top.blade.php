@@ -6,59 +6,43 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-9">
+    <!-- 投稿された新着記事が入る -->
             <div class="row">
                 <h6>新着写真ブロック</h6>
             </div>
-    
-    <!-- 新着の写真が入る -->
+
             <div class="row">
-                <div class="col-md-2 my-3 mx-auto">
-                    <img src="#" class="my-2 " height="130px" width="120px">
-                    <p class="mb-0">投稿者</p>
-                    <p>日付</p>
-                </div>
-                <div class="col-md-2 my-3 mx-auto">
-                    <img src="#" class="my-2 " height="130px" width="120px">
-                    <p class="mb-0">投稿者</p>
-                    <p>日付</p>
-                </div>
-                <div class="col-md-2 my-3 mx-auto">
-                    <img src="#" class="my-2 " height="130px" width="120px">
-                    <p class="mb-0">投稿者</p>
-                    <p>日付</p>
-                </div>
-                <div class="col-md-2 my-3 mx-auto">
-                    <img src="#" class="my-2 " height="130px" width="120px">
-                    <p class="mb-0">投稿者</p>
-                    <p>日付</p>
-                </div>
-                <div class="col-md-2 my-3 mx-auto">
-                    <img src="#" class="my-2 " height="130px" width="120px">
-                    <p class="mb-0">投稿者</p>
-                    <p>日付</p>
-                </div>
+                @foreach ($photos as $photo)
+                    <div class="col-md-2 my-2 mx-auto">
+                        <img src="{{ asset('storage/image/'.$photo->image_path) }}" class="my-2 " height="130px" width="120px">
+                        <p class="mb-0">{{ auth::user()->name }}</p>
+                        <p>{{ $photo->created_at }}</p>
+                    </div>
+                @endforeach
             </div>
             
+    <!-- 投稿された新着記事が入る -->
             <div class="row mt-5">
                 <h6>新着ブロック</h6>
             </div>
             
-    <!-- 投稿された新着記事が入る -->
-            <div class="row">
-                <table class="table col-md-10 box-table">
+            <div class="row mt-4">
+                <table class="table col-md-11 box-table mx-auto">
                     <tr>
                         <th>ID</th>
                         <th>タイトル</th>
                         <th>本文</th>
                         <th>投稿者名</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>タイトル１</td>
-                        <td>本文が入ります。本文が入ります。本文が入ります。本文が入ります。</td>
-                        <td>投稿太郎</td>
-                    </tr>
+                    @foreach ($posts as $post)
+                        <tr>
+                            <td>{{ $post->id}}</td>
+                            <td>{{ Str::limit($post->title,15) }}</td>
+                            <td>{{ Str::limit($post->body,150) }}</td>
+                            <td>{{ Auth::user()->name }}</td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

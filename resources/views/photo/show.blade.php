@@ -18,12 +18,12 @@
               <div class="col-4">
                 <div class="clear-fix">
                   <div class="float-left">
-                    <img src="{{ $photo->image }}" height="120px" width="120px">
+                    <img src="{{ asset('storage/image/'.$photo->image_path) }}" height="120px" width="120px">
                   </div>
                 </div>
               </div>
               <div class="col-7 text-center ml-3">
-                <p class="mx-auto"value="{{ $photo->pet_id}}">{{ $photo->pet_id}}</p>
+                <p class="mx-auto">{{ $photo->pet->name }}</p>
                 <p>{{ $photo->body }}</p>
               </div>
 

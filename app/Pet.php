@@ -14,4 +14,8 @@ class Pet extends Model
       'gender' => 'required|in:m,f,others',
       );
 
+    public function photos()
+    {
+      return $this->hasMany('App\Photo');
+    }
 }

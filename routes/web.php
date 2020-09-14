@@ -54,11 +54,19 @@ Route::get('/photo/show/{id}', 'PhotoController@show');
 
 
 //掲示板記事一覧
-Route::get('/posts', 'PostController@index');
+Route::resource('posts', 'PostController');
+Route::resource('postcomments', 'PostCommentController');
 
-//掲示板記事作成
-Route::get('/posts/create', 'PostController@add');
-Route::post('/posts/create', 'PostController@create');
+// //掲示板記事作成
+// Route::get('/posts/create', 'PostController@add');
+// Route::post('/posts/create', 'PostController@create');
 
 // //掲示板記事詳細
-// Route::get('/posts/show/{$id}', 'PostController@show');
+// Route::get('/posts/show/{id}', 'PostController@show');
+
+// //掲示板記事編集
+// Route::get('/posts/edit', 'PostController@edit');
+// Route::post('/posts/edit', 'PostController@update');
+
+// //記事削除
+// Route::get('/posts/delete', 'PostController@delete');

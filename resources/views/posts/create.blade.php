@@ -3,55 +3,29 @@
 @section('title', '記事投稿画面')
 
 @section('content')
-  <div class="container mt-4">
-    <div class="border p-4">
-      <h1 class="h5 mb-4">
-        投稿新規作成
-      </h1>
-      
-      <form method="POST" action="{{ action('PostController@create') }}">
-        @csrf
-        
-        <fieldset class="mb-4">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      @if(count($errors) > 0)
+        <ul>
+          @foreach($errors->all() as $e)
+            <li><span class="text-danger">{{ $e }}</span></li>
+          @endforeach
+        </ul>
+      @endif
+      <form action="{{ route('posts.store') }}" method="POST">
+        {{csrf_field()}}
           <div class="form-group">
-            <label class="title">
-              タイトル
-            </label>
-              <input id="title" name="title" class="form-control {{ $errors->has('title') ? 'is-invaild' : '' }}" 
-              value="{{ old('title') }}"type="text">
-              @if ($errors->has('title'))
-                <span class="invaild-feedback">
-                  {{ $errors->first('title') }}
-                </span>
-              @endif
+            <label>タイトル</label>
+            <input type="text" class="form-control" placeholder="タイトルを入力して下さい" name="title">
           </div>
-          
           <div class="form-group">
-            <label for="body">
-              本文
-            </label>
-            <textarea class="form-control {{ $errors->has('body') ? 'is-invaild' : '' }}" 
-            type="textarea" id="body" name="body" row="4">
-              {{ old('body') }}
-            </textarea>
-            @if ($errors->has('body'))
-              <div class="invaild-feedback">
-                {{ $errors->first('body') }}
-              </div>
-            @endif  
+            <label>内容</label>
+            <textarea class="form-control" placeholder="内容" rows="5" name="body"></textarea>
           </div>
-          
-          <div class="mt-5">
-            <a class="btn btn-secondary" href="{{ action('PostController@index') }}">
-              キャンセル
-            </a>
-            
-            <button type="submit" class="btn btn-primary">
-              投稿する
-            </button>
-          </div>
-        </fieldset>
+          <button type="submit" class="btn btn-primary">作成する</button>
       </form>
     </div>
   </div>
+</div>
 @endsection

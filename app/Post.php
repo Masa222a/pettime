@@ -6,14 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $guarded = array('id');
+    protected $fillable = array('id');
     
     public static $rules = array(
-      'title' => 'required|max:50',    
-      'body' => 'required|max:2000',
+      'title' => 'required|max:20',    
+      'body' => 'required',
     );
     
-    public function comments()
+    public function postcomments()
     {
       return $this->hasMany('App\PostComment');
     }
@@ -22,4 +22,6 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+    
+
 }

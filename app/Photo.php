@@ -9,11 +9,11 @@ class Photo extends Model
     protected $guarded = array('id');
     
     public static $rules = array(
-      'image' => 'image|file',
+      'image' => 'required|image|mimes:jpeg,jpggif.png',
       );
 
-    public function pets()
+    public function pet()
     {
-      return $this->hasMany('App\Pets');
+      return $this->belongsTo('App\Pet');
     }
 }

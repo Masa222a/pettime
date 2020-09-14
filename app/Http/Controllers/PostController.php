@@ -3,27 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PostComment;
 use App\Post;
 use App\User;
 use Auth;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $posts = Post::all();
         
-        return view('posts.index', ['posts' => $posts]);
-    }
-    
-    public function add()
-    {
-        return view('posts.create');
+        return view('posts.index',compact('posts'));
     }
 
     /**
@@ -31,20 +32,30 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $this->validate($request, Post::$rules);
         
         $post = new Post;
-        $form = $request->all();
         
-        unset($form['_token']);
-        
-        $post->fill($form);
+        $post->title = $request->title;
+        $post->body = $request->body;
         $post->user_id = Auth::id();
+
         $post->save();
         
-        return redirect('/posts');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -55,7 +66,9 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -64,9 +77,16 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        
+        $post_form = $request->all();
+        unset($post_form['_token']);
+
+        $post->fill($post_form)->save();
+        
+        return view('posts.edit', ['post_form'=>$post]);
     }
 
     /**
@@ -78,7 +98,14 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        
+        $post->title = $request->title;
+        $post->body = $request->body;
+
+        $post->save();
+        
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -89,6 +116,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        
+        $post->delete();
+        
+        return redirect()->route('posts.index');
     }
 }

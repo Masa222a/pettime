@@ -17,7 +17,7 @@ class CreatePhotoCommentsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('photo_id');
-            $table->string('comment');
+            $table->string('body');
 
             $table->timestamps();
             

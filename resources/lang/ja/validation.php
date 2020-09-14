@@ -116,6 +116,9 @@ return [
     'uploaded' => 'The :attribute failed to upload.',
     'url' => 'The :attribute format is invalid.',
     'uuid' => 'The :attribute must be a valid UUID.',
+    'title.required' => 'タイトルは必須です。',
+    'title.max' => 'タイトルは20文字以内で記入してください。',
+    'body.required' => '内容は必須です。',
 
     /*
     |--------------------------------------------------------------------------

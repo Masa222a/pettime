@@ -7,7 +7,6 @@ use App\Photo;
 use App\Pet;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use InterventionImage;
 
 class PhotoController extends Controller
 {
@@ -18,7 +17,7 @@ class PhotoController extends Controller
      */
     public function index(Request $request)
     {
-        $photos = Photo::all();
+        $photos = Photo::latest()->get();
         $pets = Pet::where('user_id', Auth::id());
 
         return view('photo.index', ['photos' => $photos]);
@@ -47,11 +46,7 @@ class PhotoController extends Controller
         $form = $request->all();
         
         $path = $request->file('image')->store('public/image');
-        InterventionImage::make($path)
-            ->resize(130, 130, function($constraint) {
-                $constraint->aspectRatio();
-            })->save($image);
-        $photo->image_path = basename($image);
+        $photo->image_path = basename($path);
         
         unset($form['_token']);
         unset($form['image']);
@@ -84,7 +79,7 @@ class PhotoController extends Controller
     {
        $photo = Photo::find($id);
 
-        return view('photo.show',['photo' =>$photo]);
+        return view('photo.show',['photo' => $photo]);
     }
 
     /**
