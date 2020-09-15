@@ -14,7 +14,6 @@ class PostComment extends Model
     protected $guarded = array('id');
     
     public static $rules = array(
-      'post_id' => 'required|exists:posts,id',    
       'body' => 'required|max:2000',
     );
 

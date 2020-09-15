@@ -3,9 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PostComment;
+use App\Post;
+use Auth;
 
 class PostCommentController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -34,7 +42,19 @@ class PostCommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, PostComment::$rules);
+        $postcomment = new PostComment;
+        
+        $postcomment->body = $request->body;
+        $postcomment->user_id = Auth::id();
+        $postcomment->post_id = $request->post_id;
+
+        $postcomment->save();
+        
+        $post = Post::find($request->post_id);
+        $postcomments = PostComment::where('post_id', $request->post_id)->get();
+        
+        return view('posts.show', compact('post', 'postcomments'));
     }
 
     /**
@@ -45,7 +65,10 @@ class PostCommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::find($id);
+        $post->load('user', 'postcomment');
+
+        return view('posts.show', compact('post'));
     }
 
     /**

@@ -23,6 +23,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $posts->load('user');
         
         return view('posts.index',compact('posts'));
     }
@@ -67,8 +68,10 @@ class PostController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
+        
+        $postcomments = PostComment::where('post_id', $id)->get();
 
-        return view('posts.show', compact('post'));
+        return view('posts.show', compact('post', 'postcomments'));
     }
 
     /**
@@ -80,6 +83,10 @@ class PostController extends Controller
     public function edit(Request $request, $id)
     {
         $post = Post::find($id);
+        
+        if(Auth::id() !== $post->user_id){
+            return abort(404);
+        }
         
         $post_form = $request->all();
         unset($post_form['_token']);
@@ -100,6 +107,10 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         
+        if(Auth::id() !== $post->user_id){
+            return abort(404);
+        }
+        
         $post->title = $request->title;
         $post->body = $request->body;
 
@@ -117,6 +128,10 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+        
+        if(Auth::id() !== $post->user_id){
+            return abort(404);
+        }
         
         $post->delete();
         
