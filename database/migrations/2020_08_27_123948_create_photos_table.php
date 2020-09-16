@@ -24,7 +24,7 @@ class CreatePhotosTable extends Migration
             
             
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('pet_id')->references('id')->on('pets');
+            $table->foreign('pet_id')->references('id')->on('pets')->onDelete('cascade');
         });
     }
 
@@ -36,5 +36,6 @@ class CreatePhotosTable extends Migration
     public function down()
     {
         Schema::dropIfExists('photos');
+
     }
 }

@@ -20,14 +20,14 @@
                         <thead class="thead-light">
                             <tr>
                                 <th width="10%">ID</th>
-                                <th width="10%">USER_ID</th>
                                 <th width="20%">名前</th>
                                 <th width="20%">種類</th>
                                 <th width="20%">性別</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($posts as $pet)
+
+                            @foreach($pets as $pet)
                                 <tr>
                                     <th>{{ $pet->id }}</th>
                                     <td>{{ Str::limit($pet->name, 50) }}</td>
@@ -37,6 +37,7 @@
                                     <td><a href="{{ action('PetController@delete', ['id' => $pet->id]) }}" role="button" class="btn btn-danger btn-sm">削除</a></td>
                                 </tr>
                             @endforeach
+
                         </tbody>
                     </table>
                 </div>

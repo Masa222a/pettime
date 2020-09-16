@@ -3,7 +3,8 @@
 @section('title', '写真詳細画面')
 
 @section('content')
-  <div class="container">
+<div class="container">
+    <div class="container">
     <div class="row justify-content-center">
       
       <div class="col-md-4">
@@ -37,4 +38,31 @@
       
     </div>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <form action="{{ route('photocomments.store') }}" method="POST">
+        @csrf
+        <input type="hidden" name="photo_id" value="{{ $photo->id }}">
+          <div class="form-group">
+            <label>コメント</label>
+            <textarea class="form-control" placeholder="内容" row="5" name="body"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">コメントする</button>
+      </form>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      @foreach ($photocomments as $photocomment)
+        <div class="card mt-3">
+          <h5 class="card-header">投稿者:{{ $photocomment->user->name }}</h5>
+          <div class="card-body">
+            <h5 class="card-title">投稿日時:{{ $photocomment->created_at }}</h5>
+            <p class="card-text">内容:{{ $photocomment->body }}</p>
+          </div>
+        </div>
+      @endforeach
+    </div>
+  </div>
+</div>
 @endsection

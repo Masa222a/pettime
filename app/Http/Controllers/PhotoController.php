@@ -2,34 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Photo;
-use App\Pet;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\PhotoComment;
+use App\Photo;
+use App\User;
+use App\Pet;
+use Auth;
 
 class PhotoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $photos = Photo::latest()->get();
-        $pets = Pet::where('user_id', Auth::id());
-
-        return view('photo.index', ['photos' => $photos]);
-    }
-    
-    public function add()
-    {
+        $photos->load('user');
         
-        $photo = Photo::all();
-        $pets = DB::table('pets')->where('user_id', Auth::id())->get();
-        
-        return view('photo.create', ['pets' => $pets, 'photo' => $photo]);
+        return view('photos.index',compact('photos', 'pets'));
     }
 
     /**
@@ -37,25 +35,12 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-        $this->validate($request, Photo::$rules);
-
-        $photo = new Photo;
-
-        $form = $request->all();
+        $photo = Photo::all();
+        $pets = DB::table('pets')->where('user_id', Auth::id())->get();
         
-        $path = $request->file('image')->store('public/image');
-        $photo->image_path = basename($path);
-        
-        unset($form['_token']);
-        unset($form['image']);
-        
-        $photo->fill($form);
-        $photo->user_id = Auth::id();
-        $photo->save();
-        
-        return redirect('/photo');
+        return view('photos.create',compact('photo','pets'));
     }
 
     /**
@@ -66,20 +51,41 @@ class PhotoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, Photo::$rules);
+        
+        $photo = new Photo;
+        
+        $form = $request->all();
+        
+        $path = $request->file('image')->store('public/image');
+        $photo->image_path = basename($path);
+        
+        $photo->body = $request->body;
+        $photo->user_id = Auth::id();
+        
+        unset($form['_token']);
+        unset($form['image']);
+        
+        $photo->fill($form);
+        $photo->user_id = Auth::id();
+        $photo->save();
+        
+        return redirect()->route('photos.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id,
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-       $photo = Photo::find($id);
-
-        return view('photo.show',['photo' => $photo]);
+        $photo = Photo::find($id);
+        
+        $photocomments = PhotoComment::where('photo_id', $id)->get();
+        
+        return view('photos.show', compact('photo', 'photocomments'));
     }
 
     /**
@@ -90,7 +96,18 @@ class PhotoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $photo = Photo::find($id);
+
+        if(Auth::id() !== $photo->user_id){
+            return abort(404);
+        }
+        
+        $photo_form = $request->all();
+        unset($photo_form['_token']);
+        
+        $photo->fill($photo_form)->save();
+        
+        return view('photos.edit', ['photo_form'=>$photo]);
     }
 
     /**
@@ -102,7 +119,17 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $photo = Photo::find($id);
+
+        if(Auth::id() !== $photo->user_id){
+            return abort(404);
+        }
+        
+        $photo->body = $request->body;
+        
+        $photo->save();
+        
+        return view('photos.edit', compact('photo')); 
     }
 
     /**

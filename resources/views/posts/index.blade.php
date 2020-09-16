@@ -6,22 +6,23 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-     <div class="card text-center">
+        <h5 class="mt-2 ml-2">投稿一覧</h5>
+      @foreach ($posts as $post)
+      <a href="{{ route('posts.show', $post->id) }}">
+      <div class="card mt-4">
         <div class="card-header">
-          投稿一覧
+          <p class="card-title my-0">{{ $post->title }}</p>
         </div>
-        @foreach ($posts as $post)
         <div class="card-body">
-          <h5 class="card-title">タイトル:{{ $post->title }}</h5>
-          <p class="card-text">内容:{{ $post->body }}</p>
-          <p class="card-text">投稿者:{{ $post->user->name }}</p>
-          <a href="{{ route('posts.show', $post->id) }}" class="btn btn-primary">詳細</a>
+          <p class="card-text">{{ $post->body }}</p>
+          
         </div>
-        <div class="card-footer text-muted">
-          {{ $post->created_at }}
+        <div class="card-footer text-muted text-right py-1">
+          <p class="my-auto">投稿者:{{ $post->user->name }}&emsp;投稿日時:{{ $post->created_at }}</p>
         </div>
-        @endforeach
       </div>
+      </a>
+      @endforeach
     </div>
     <div class="col-md-2">
       <a href="{{ route('posts.create') }}" class="btn btn-primary">新規投稿</a>

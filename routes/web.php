@@ -41,32 +41,10 @@ Route::get('pet/delete', 'PetController@delete');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//middlewareが必要なもののグループ化
-//写真投稿一覧
-Route::get('/photo', 'PhotoController@index')->middleware('auth');
+//写真投稿
+Route::resource('photos', 'PhotoController');
+Route::resource('photocomments', 'PhotoCommentController');
 
-//写真記事作成
-Route::get('/photo/create', 'PhotoController@add');
-Route::post('/photo/create', 'PhotoController@create');
-
-//写真詳細
-Route::get('/photo/show/{id}', 'PhotoController@show');
-
-
-//掲示板記事一覧
+//掲示板
 Route::resource('posts', 'PostController');
 Route::resource('postcomments', 'PostCommentController');
-
-// //掲示板記事作成
-// Route::get('/posts/create', 'PostController@add');
-// Route::post('/posts/create', 'PostController@create');
-
-// //掲示板記事詳細
-// Route::get('/posts/show/{id}', 'PostController@show');
-
-// //掲示板記事編集
-// Route::get('/posts/edit', 'PostController@edit');
-// Route::post('/posts/edit', 'PostController@update');
-
-// //記事削除
-// Route::get('/posts/delete', 'PostController@delete');

@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\PhotoComment;
 use App\Photo;
-use App\Post;
 use Auth;
 
-class TopController extends Controller
+class PhotoCommentController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
@@ -26,10 +21,7 @@ class TopController extends Controller
      */
     public function index()
     {
-        $photos = Photo::latest()->get();
-        $posts = Post::latest()->get();
-
-        return view('top',['photos' => $photos, 'posts' => $posts]);
+        //
     }
 
     /**
@@ -50,7 +42,19 @@ class TopController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, PhotoComment::$rules);
+        $photocomment = new PhotoComment;
+        
+        $photocomment->body = $request->body;
+        $photocomment->user_id = Auth::id();
+        $photocomment->photo_id = $request->photo_id;
+
+        $photocomment->save();
+        
+        $photo = Photo::find($request->photo_id);
+        $photocomments = PhotoComment::where('photo_id', $request->photo_id)->get();
+        
+        return view('photos.show', compact('photo', 'photocomments'));
     }
 
     /**
@@ -61,7 +65,10 @@ class TopController extends Controller
      */
     public function show($id)
     {
-        //
+        $photo = Photo::find($id);
+        $photo = load('user', 'photocomment');
+        
+        return view('photos.show', compact('photo'));
     }
 
     /**

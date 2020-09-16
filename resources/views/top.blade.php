@@ -16,7 +16,7 @@
                 @foreach ($photos as $photo)
                     <div class="col-md-2 my-2 mx-auto">
                         <img src="{{ asset('storage/image/'.$photo->image_path) }}" class="my-2 " height="130px" width="120px">
-                        <p class="mb-0">{{ auth::user()->name }}</p>
+                        <p class="mb-0">{{ $photo->user->name }}</p>
                         <p>{{ $photo->created_at }}</p>
                     </div>
                 @endforeach
@@ -40,7 +40,7 @@
                             <td>{{ $post->id}}</td>
                             <td>{{ Str::limit($post->title,15) }}</td>
                             <td>{{ Str::limit($post->body,150) }}</td>
-                            <td>{{ Auth::user()->name }}</td>
+                            <td>{{ $post->user->name }}</td>
                         </tr>
                     @endforeach
                 </table>

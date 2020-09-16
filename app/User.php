@@ -57,12 +57,17 @@ class User extends Authenticatable
         
     public function pets()
     {
-      return $this->hasMany('App\Pets');
+      return $this->hasMany('App\Pet');
     }
     
     public function photos()
     {
-      return $this->hasMany('App\Photos');
+      return $this->hasMany('App\Photo');
+    }
+    
+    public function photocomments()
+    {
+      return $this->hasMany('App\PhotoComment');
     }
     
 }

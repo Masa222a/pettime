@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Pet;
 use App\Photo;
 use App\Post;
-use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use Auth;
 
 class PetController extends Controller
 {
@@ -18,9 +18,9 @@ class PetController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Pet::all()->sortByDesc('created_at');
+        $pets = Auth::user()->pets;
         
-        return view('pet.index', ['posts' => $posts]);
+        return view('pet.index', ['pets' => $pets]);
     }
     
     public function add()
@@ -113,6 +113,9 @@ class PetController extends Controller
     {
         $pet = Pet::find($request->id);
         
+        if(Auth::id() !== $pet->user_id){
+            return abort(404);
+        }
         $pet->delete();
         return redirect('/pet');
     }
