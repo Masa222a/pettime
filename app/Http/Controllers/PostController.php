@@ -25,6 +25,9 @@ class PostController extends Controller
         $posts = Post::all();
         $posts->load('user');
         
+        //pagination
+        $posts = Post::paginate(10);
+        
         return view('posts.index',compact('posts'));
     }
 

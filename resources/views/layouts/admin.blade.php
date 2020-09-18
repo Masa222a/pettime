@@ -21,7 +21,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container">
-        <a class="navbar-brand " href="{{ url('/') }}">ペットタイム</a>
+        <a class="navbar-brand " href="{{ url('/') }}"><i class="fas fa-dog mr-2"></i>ペットタイム</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

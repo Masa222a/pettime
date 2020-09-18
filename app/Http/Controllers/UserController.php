@@ -37,14 +37,17 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store() { 
+    public function store() 
+    { 
       $user = new Users; 
       $user->username = $request->name; 
       $user->mail = $request->email; 
       $user->age = $request->age; 
       $user->created_user_name = $request->name; 
       
-      $user->save(); }
+      $user->save(); 
+        
+    }
 
     /**
      * Display the specified resource.
@@ -113,7 +116,6 @@ class UserController extends Controller
     {
         //紐づいているテーブル取得後、削除
         $user = User::find($id);
-
 
         
         $user->delete();

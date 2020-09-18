@@ -11,7 +11,7 @@
             <div class="row">
                 <h6>新着写真ブロック</h6>
             </div>
-
+            
             <div class="row">
                 @foreach ($photos as $photo)
                     <div class="col-md-2 my-2 mx-auto">
@@ -20,7 +20,7 @@
                         <p>{{ $photo->created_at }}</p>
                     </div>
                 @endforeach
-            </div>
+            </div
             
     <!-- 投稿された新着記事が入る -->
             <div class="row mt-5">
@@ -58,7 +58,7 @@
                             <p><a href="{{ url('/pet') }}">ペット一覧</a></p>
                             <p><a href="{{ url('/user') }}">プロフィール編集</a></p>
                             {{-- hrefの引数で検索 --}}
-                            <p><a href="{{ action('UserController@delete', Auth::user()->id) }}">アカウント削除</a></p>
+                            <p><a href="{{ action('UserController@delete', Auth::user()->id) }}" class="text-danger">アカウント削除</a></p>
                         </div>
                 </div>
             </div>

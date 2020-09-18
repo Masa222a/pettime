@@ -22,12 +22,27 @@ class PhotoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $photos = Photo::latest()->get();
-        $photos->load('user');
         
-        return view('photos.index',compact('photos', 'pets'));
+        $user_name = $request->user_name;
+        $photos = [];
+        if($user_name != '') {
+            $users = User::where('name', $user_name)->get();
+            foreach ($users as $user){
+                $photos = $user->photos;
+            }
+            
+        } else {
+            $photos = Photo::latest()->get();
+            $photos->load('user');
+            
+        }
+        
+        //pagination
+        $photos = Photo::paginate(10);
+
+        return view('photos.index',compact('photos', 'pets', 'user_name'));
     }
 
     /**
@@ -140,6 +155,14 @@ class PhotoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $photo = Photo::find($id);
+        
+        if(Auth::id() !== $photo->user_id) {
+            return abort(404);
+        }
+        
+        $photo->delete();
+        
+        return redirect()->route('photos.index');
     }
 }

@@ -27,11 +27,10 @@
                 <p class="mx-auto">{{ $photo->pet->name }}</p>
                 <p>{{ $photo->body }}</p>
               </div>
-
             </div>
           </div>
           <div class="card-footer text-right">
-            <small class="text-muted">{{ $photo->created_at }}</small>
+            <small class="text-muted mr-2">{{ $photo->created_at }}</small>
           </div>
         </div>
       </div>
@@ -55,10 +54,9 @@
     <div class="col-md-8">
       @foreach ($photocomments as $photocomment)
         <div class="card mt-3">
-          <h5 class="card-header">投稿者:{{ $photocomment->user->name }}</h5>
           <div class="card-body">
-            <h5 class="card-title">投稿日時:{{ $photocomment->created_at }}</h5>
-            <p class="card-text">内容:{{ $photocomment->body }}</p>
+            <p class="card-text">{{ $photocomment->body }}</p>
+            <p class="card-text">投稿者:{{ $photocomment->user->name }}&emsp;投稿日時:{{ $photocomment->created_at }}</p>
           </div>
         </div>
       @endforeach

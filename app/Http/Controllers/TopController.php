@@ -27,6 +27,7 @@ class TopController extends Controller
     public function index()
     {
         $photos = Photo::latest()->get();
+        
         $posts = Post::latest()->get();
 
         return view('top',['photos' => $photos, 'posts' => $posts]);
