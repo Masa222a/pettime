@@ -91,11 +91,6 @@ class PostController extends Controller
             return abort(404);
         }
         
-        $post_form = $request->all();
-        unset($post_form['_token']);
-
-        $post->fill($post_form)->save();
-        
         return view('posts.edit', ['post_form'=>$post]);
     }
 
@@ -109,6 +104,7 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
+        $postcomments = PostComment::where('post_id', $id)->get();
         
         if(Auth::id() !== $post->user_id){
             return abort(404);
@@ -117,9 +113,12 @@ class PostController extends Controller
         $post->title = $request->title;
         $post->body = $request->body;
 
-        $post->save();
+        $post_form = $request->all();
+        unset($post_form['_token']);
+
+        $post->fill($post_form)->save();
         
-        return view('posts.show', compact('post'));
+        return view('posts.show', compact('post','postcomments'));
     }
 
     /**

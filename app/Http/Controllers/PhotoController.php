@@ -31,16 +31,14 @@ class PhotoController extends Controller
             $users = User::where('name', $user_name)->get();
             foreach ($users as $user){
                 $photos = $user->photos;
+
             }
             
         } else {
             $photos = Photo::latest()->get();
             $photos->load('user');
-            
         }
         
-        //pagination
-        $photos = Photo::paginate(10);
 
         return view('photos.index',compact('photos', 'pets', 'user_name'));
     }
@@ -109,20 +107,16 @@ class PhotoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         $photo = Photo::find($id);
+        $pets = DB::table('pets')->where('user_id', Auth::id())->get();
 
         if(Auth::id() !== $photo->user_id){
             return abort(404);
         }
         
-        $photo_form = $request->all();
-        unset($photo_form['_token']);
-        
-        $photo->fill($photo_form)->save();
-        
-        return view('photos.edit', ['photo_form'=>$photo]);
+        return view('photos.edit', ['photo_form'=>$photo, 'pets'=>$pets]);
     }
 
     /**
@@ -134,17 +128,29 @@ class PhotoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->validate($request, Photo::$rules);
+        
         $photo = Photo::find($id);
+        $photocomments = PhotoComment::where('photo_id', $id)->get();
+        
+        $photo_form = $request->all();
 
         if(Auth::id() !== $photo->user_id){
             return abort(404);
         }
         
+        $path = $request->file('image')->store('public/image');
+        $photo->image_path = basename($path);
+        
+        unset($photo_form['_token']);
+        unset($photo_form['image']);
+        
         $photo->body = $request->body;
+        $photo->user_id = Auth::id();
         
-        $photo->save();
-        
-        return view('photos.edit', compact('photo')); 
+        $photo->fill($photo_form)->save();
+                
+        return view('photos.show', compact('photo','photocomments')); 
     }
 
     /**

@@ -17,8 +17,8 @@
               </ul>
             @endif
             <div class="form-group row my-3">
-              <label class="col-md-2 col-form-label text-md-right" for="title">ニックネーム</label>
-              <div class="col-md-9">
+              <label class="col-md-2 col-form-label text-right ml-2" for="title">ニックネーム</label>
+              <div class="col-md-6">
                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" value="{{ $user_form->name }}">
                 
                 @error('name')
@@ -30,11 +30,11 @@
             </div>
             
             <div class="form-group row my-3">
-              <div class="col-md-9">
+              <div class="col-md-9 pl-0">
                 <div class="form-group row">
-                  <label for="gender" class="col-md-4 col-form-label text-center">性別</label>
+                  <label for="gender" class="col-md-3 col-form-label text-right ml-1">性別</label>
                   <div class="col-md-3">
-                    <select class="form-control my-1" name="gender" id="gender">
+                    <select class="form-control my-1 text-right" name="gender" id="gender">
                       <option value="m">男性</option>
                       <option value="f">女性</option>
                       <option value="others">その他</option>
@@ -47,12 +47,12 @@
                   </span>
                 @enderror
               </div>
-          </div>
+            </div>
             
             <div class="form-group row my-3">
-              <label class="col-md-3 col-form-label text-md-left ml-2" for="email">メールアドレス</label>
+              <label class="col-md-2 col-form-label text-md-left ml-2 pr-0" for="email">メールアドレス</label>
                 <div class="col-md-6">
-                  <textarea class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">{{ $user_form->email }}</textarea>
+                  <input type="text" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user_form->email }}" required autocomplete="email">
                   @error('email')
                     <span class="invalid-feedback" role="alert">
                       <strong>{{ $message }}</strong>

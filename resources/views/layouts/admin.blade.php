@@ -27,6 +27,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav mr-auto">　
+          @Auth
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/') }}">トップページ</a>
             </li>
@@ -36,6 +37,7 @@
             <li class="nav-item">
               <a class="nav-link" href="{{ url('/photos') }}">写真投稿</a>
             </li>
+          @endauth
           </ul>
           <ul class="navbar-nav">
             @guest
@@ -49,7 +51,7 @@
               @endif
             @else
                 <li class="nav-item dropdown">
-                  <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                  <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                     {{ Auth::user()->name }} <span class="caret"></span>
                   </a>
 

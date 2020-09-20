@@ -7,7 +7,7 @@
     <div class="container">
     <div class="row justify-content-center">
       
-      <div class="col-md-4">
+      <div class="col-md-12 px-0">
         <div class="card">
           <div class="card-header py-0">
             <div class="col text-center">
@@ -19,26 +19,41 @@
               <div class="col-4">
                 <div class="clear-fix">
                   <div class="float-left">
-                    <img src="{{ asset('storage/image/'.$photo->image_path) }}" height="120px" width="120px">
+                    <img src="{{ asset('storage/image/'.$photo->image_path) }}">
                   </div>
                 </div>
               </div>
-              <div class="col-7 text-center ml-3">
+              <div class="col-7 text-center ml-3 my-auto">
+                <h6 class="mb-3">ペットの名前</h6>
                 <p class="mx-auto">{{ $photo->pet->name }}</p>
+                <h6 class="mb-3">本文</h6>
                 <p>{{ $photo->body }}</p>
               </div>
             </div>
           </div>
+          
+          @if(Auth::user()->id === $photo->user_id)
           <div class="card-footer text-right">
+            <div class="btn-toolbar justify-content-between">
+              <div class="btn-group mr-2">
+                <form action="{{ route('photos.destroy', $photo->id) }}" method="post">
+                  @csrf
+                  {{ method_field('DELETE') }}
+                  <input type="submit" value="削除" class="btn btn-danger btn-sm" onclick='return confirm("削除しますか?");'>
+                </form>  
+                <a href="{{ route('photos.edit', $photo->id) }}" class="btn btn-primary btn-sm ml-2">編集</a>
+              </div>
             <small class="text-muted mr-2">{{ $photo->created_at }}</small>
+            </div>
           </div>
+          @endif
         </div>
       </div>
       
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <form action="{{ route('photocomments.store') }}" method="POST">
         @csrf
         <input type="hidden" name="photo_id" value="{{ $photo->id }}">

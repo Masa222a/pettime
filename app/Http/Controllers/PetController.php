@@ -40,15 +40,6 @@ class PetController extends Controller
         $pet = new Pet;
         $form = $request->all();
         
-        if(isset($form['image'])) {
-            $path = $request->file('image')->store('public/image');
-            $pet->image_path = basename($path);
-        } else {
-            $pet->image_path = null;
-        }
-        
-        unset($form['image']);
-        
         $pet->fill($form);
         $pet->user_id = Auth::id();
         $pet->save();

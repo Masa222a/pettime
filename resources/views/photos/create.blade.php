@@ -32,7 +32,7 @@
             </div>
           </div>
           <div class="form-group row">
-              <label class="col-md-2 text-md-right">画像</label>
+              <label class="col-md-4 text-md-right">画像</label>
               <div class="col-md-8">
                 <input type="file" class="form-control-file" name="image">
               </div>

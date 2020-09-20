@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="row">
         <h5 class="mt-2 ml-2">投稿一覧</h5>
         <a href="{{ route('posts.create') }}" class="btn btn-primary ml-auto mr-2">新規投稿</a>

@@ -16,7 +16,7 @@
             <div class="card-body">
               <div class="text-center">
                 <div>
-                  <img src="#" height="100px" width="100px">
+                  <i class="fas fa-user fa-6x"></i>
                 </div>
                 <p class="my-2">
                   {{ Auth::user()->name }}
