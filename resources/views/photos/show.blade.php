@@ -16,14 +16,11 @@
           </div>
           <div class="card-body">
             <div class="row">
-              <div class="col-4">
-                <div class="clear-fix">
-                  <div class="float-left">
-                    <img src="{{ asset('storage/image/'.$photo->image_path) }}">
-                  </div>
-                </div>
+              <div class="col-12 ml-auto">
+                <img class="mx-auto d-block" src="{{ asset('storage/image/'.$photo->image_path) }}">
+
               </div>
-              <div class="col-7 text-center ml-3 my-auto">
+              <div class="col-12 text-center ml-3 mt-4">
                 <h6 class="mb-3">ペットの名前</h6>
                 <p class="mx-auto">{{ $photo->pet->name }}</p>
                 <h6 class="mb-3">本文</h6>
