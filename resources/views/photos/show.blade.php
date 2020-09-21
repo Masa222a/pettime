@@ -17,7 +17,7 @@
           <div class="card-body">
             <div class="row">
               <div class="col-12 ml-auto">
-                <img class="mx-auto d-block" style="max-width: 100%;height: auto;" src="{{ $photo->image_path }}">
+                <img class="mx-auto d-block" src="{{ $photo->image_path }}">
 
               </div>
               <div class="col-12 text-center ml-3 mt-4">
