@@ -41,7 +41,7 @@ class PhotoController extends Controller
         }
         
 
-        return view('photos.index',compact('photos', 'pets', 'user_name'));
+        return view('photos.index',compact('photos', 'user_name'));
     }
 
     /**
