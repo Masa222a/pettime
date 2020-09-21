@@ -34,7 +34,7 @@
                 <h5 class="card-title mt-3 mx-auto" value="user_id">{{ $photo->user->name }}</h5>
                 <div class="card-body pt-2">
                   <div>
-                    <img src="{{ asset('storage/image/'.$photo->image_path) }}" class="ml-3" width="130px" height="130px">
+                    <img src="{{ $photo->image_path }}" class="ml-3" width="130px" height="130px">
                   </div>
                 </div>
                 <div class="card-footer">

@@ -9,6 +9,7 @@ use App\Photo;
 use App\User;
 use App\Pet;
 use Auth;
+use Storage;
 
 class PhotoController extends Controller
 {
@@ -70,8 +71,8 @@ class PhotoController extends Controller
         
         $form = $request->all();
         
-        $path = $request->file('image')->store('public/image');
-        $photo->image_path = basename($path);
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $photo->image_path = Storage::disk('s3')->url($path);
         
         $photo->body = $request->body;
         $photo->user_id = Auth::id();
@@ -139,8 +140,8 @@ class PhotoController extends Controller
             return abort(404);
         }
         
-        $path = $request->file('image')->store('public/image');
-        $photo->image_path = basename($path);
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $photo->image_path = Storage::disk('s3')->url($path);
         
         unset($photo_form['_token']);
         unset($photo_form['image']);
