@@ -32,7 +32,7 @@ class PostController extends Controller
             }
             
         } else {
-            $posts = Post::all();
+            $posts = Post::latest()->get();
             $posts->load('user');
             
         }

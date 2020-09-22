@@ -34,7 +34,7 @@ class PhotoController extends Controller
                 $photos = $user->photos;
 
             }
-            
+    
         } else {
             $photos = Photo::latest()->get();
             $photos->load('user');
