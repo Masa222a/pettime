@@ -10,6 +10,23 @@
         <h5 class="mt-2 ml-2">投稿一覧</h5>
         <a href="{{ route('posts.create') }}" class="btn btn-primary ml-auto mr-2">新規投稿</a>
       </div>
+      
+      <div class="row mt-3">
+        <div class="col-md-5">
+          <form action="{{ route('posts.index') }}" method="get">
+            <div class="form-group row align-items-right">
+              <div class="col-auto">
+            	  <input type="text" class="form-control ml-3" name="user_name" value="{{ $user_name }}" placeholder="ユーザー名">
+            	</div>
+              <div class="col-auto">
+                @csrf
+            	  <input type="submit" class="btn btn-primary" value="検索">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
       @foreach ($posts as $post)
       <a href="{{ route('posts.show', $post->id) }}">
       <div class="card mt-4">

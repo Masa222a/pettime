@@ -20,15 +20,24 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-        $posts->load('user');
+        $user_name = $request->user_name;
+        $posts= [];
+        if($user_name != '') {
+            $users = User::where('name', $user_name)->get();
+            foreach ($users as $user) {
+                $posts = $user->posts;
+                
+            }
+            
+        } else {
+            $posts = Post::all();
+            $posts->load('user');
+            
+        }
         
-        //pagination
-        $posts = Post::paginate(10);
-        
-        return view('posts.index',compact('posts'));
+        return view('posts.index',compact('posts', 'user_name'));
     }
 
     /**
