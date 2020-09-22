@@ -140,7 +140,7 @@ class PhotoController extends Controller
             return abort(404);
         }
         
-        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $path = Storage::disk('s3')->putFile('/',$photo_form['image'],'public');
         $photo->image_path = Storage::disk('s3')->url($path);
         
         unset($photo_form['_token']);
