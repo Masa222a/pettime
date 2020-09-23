@@ -21,10 +21,9 @@
 
               </div>
               <div class="col-12 text-center ml-3 mt-4">
-                <h6 class="mb-3">ペットの名前</h6>
-                <p class="mx-auto">{{ $photo->pet->name }}</p>
+                <h6 class="mb-3 mx-auto">ペットの名前&emsp;&emsp;{{ $photo->pet->name }}</h6>
                 <h6 class="mb-3">本文</h6>
-                <p>{{ $photo->body }}</p>
+                <p class="mx-auto">{{ $photo->body }}</p>
               </div>
             </div>
           </div>

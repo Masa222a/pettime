@@ -16,7 +16,7 @@
                 @foreach ($photos as $photo)
                     <div class="col-8 col-sm-6 col-md-2 my-2 mx-auto">
                         <a href="/photos/{{$photo->id}}">
-                            <img src="{{ $photo->image_path }}" class="my-2 " height="130px" width="120px">
+                            <img src="{{ $photo->image_path }}" class="my-2" width="140">
                             <p class="mb-0">{{ $photo->user->name }}</p>
                             <p>{{ $photo->created_at }}</p>
                         </a>

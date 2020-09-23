@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="row">
         <h5 class="my-auto ml-3">写真一覧</h5>
         <a href="{{ route('photos.create') }}" role="button" class="btn btn-primary ml-auto mr-2">新規作成</a>
@@ -32,9 +32,9 @@
             <a href="{{ route('photos.show', $photo->id) }}" class="card-block">
               <div class="card mb-3">
                 <h5 class="card-title mt-3 mx-auto" value="user_id">{{ $photo->user->name }}</h5>
-                <div class="card-body pt-2">
+                <div class="card-body pt-2 mx-auto">
                   <div>
-                    <img src="{{ $photo->image_path }}" class="ml-3" width="130px" height="130px">
+                    <img src="{{ $photo->image_path }}" width="140px">
                   </div>
                 </div>
                 <div class="card-footer">
