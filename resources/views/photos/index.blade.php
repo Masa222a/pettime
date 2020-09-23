@@ -28,7 +28,7 @@
       
       <div class="row mt-3 pt-3">
         @foreach ($photos as $photo)
-          <div class="col-8 col-sm-6 col-md-3 mx-auto">
+          <div class="col-8 col-sm-6 col-md-3 mx-auto mb-3">
             <a href="{{ route('photos.show', $photo->id) }}" class="card-block">
               <div class="card mb-3">
                 <h5 class="card-title mt-3 mx-auto" value="user_id">{{ $photo->user->name }}</h5>
