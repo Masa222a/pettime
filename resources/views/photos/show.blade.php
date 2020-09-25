@@ -28,7 +28,7 @@
             </div>
           </div>
           
-          @if(Auth::user()->id === $photo->user_id)
+          @if(Auth::user() && Auth::user()->id === $photo->user_id)
           <div class="card-footer text-right">
             <div class="btn-toolbar justify-content-between">
               <div class="btn-group mr-2">
@@ -62,7 +62,7 @@
     </div>
   </div>
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       @foreach ($photocomments as $photocomment)
         <div class="card mt-3">
           <div class="card-body">

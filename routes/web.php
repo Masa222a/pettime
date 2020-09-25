@@ -12,39 +12,48 @@
 */
 Route::get('/', 'TopController@index');
 
-Auth::routes();
-
-//アカウント画面表示
-Route::get('/user', 'UserController@index');
-
-//アカウント編集
-Route::get('/user/edit', 'UserController@edit');
-Route::post('/user/update', 'UserController@update');
-
-//アカウント削除
-Route::get('/user/delete/{id}', 'UserController@delete');
-
-
-//ペット一覧
-Route::get('/pet', 'PetController@index');
-
-//ペット作成
-Route::get('/pet/create', 'PetController@add');
-Route::post('/pet/create', 'PetController@create');
-
-//ペット編集
-Route::get('/pet/edit', 'PetController@edit');
-Route::post('/pet/edit', 'PetController@update');
-
-//ペット削除
-Route::get('pet/delete', 'PetController@delete');
-
 Route::get('/home', 'HomeController@index')->name('home');
 
-//写真投稿
-Route::resource('photos', 'PhotoController');
-Route::resource('photocomments', 'PhotoCommentController');
+Auth::routes();
 
-//掲示板
-Route::resource('posts', 'PostController');
-Route::resource('postcomments', 'PostCommentController');
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/user','UserController@index');
+  
+  Route::get('/user/edit', 'UserController@edit');
+  Route::post('/user/update', 'UserController@update');
+  
+  Route::get('/user/delete/{id}', 'UserController@delete');
+});
+
+
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/pet', 'PetController@index');
+  
+  Route::get('/pet/create', 'PetController@add');
+  Route::post('/pet/create', 'PetController@create');
+  
+  Route::get('/pet/edit', 'PetController@edit');
+  Route::post('/pet/edit', 'PetController@update');
+  
+  Route::get('/pet/delete', 'PetController@delete');
+});
+
+
+Route::resource('/photos', 'PhotoController', ['only' => ['index', 'show']]);
+
+Route::get('/img/add', 'PhotoController@create')->middleware('auth'); //toFix
+
+Route::resource('/photos', 'PhotoController', ['only' => [ 'store', 'edit', 'update', 'destroy']])->middleware('auth');
+
+Route::resource('photocomments', 'PhotoCommentController', ['only' => ['index', 'show']]);
+
+Route::resource('photocomments', 'PhotoCommentController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']])->middleware('auth');;
+
+
+Route::resource('posts', 'PostController', ['only' => ['index', 'show']]);
+
+Route::resource('posts', 'PostController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']])->middleware('auth');
+
+Route::resource('postcomments', 'PostCommentController', ['only' => ['index', 'show']]);
+
+Route::resource('postcomments', 'PostCommentController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']])->middleware('auth');

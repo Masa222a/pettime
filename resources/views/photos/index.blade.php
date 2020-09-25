@@ -8,7 +8,7 @@
     <div class="col-md-12">
       <div class="row">
         <h5 class="my-auto ml-3">写真一覧</h5>
-        <a href="{{ route('photos.create') }}" role="button" class="btn btn-primary ml-auto mr-2">新規作成</a>
+        <a href="{{ action('PhotoController@create') }}" role="button" class="btn btn-primary ml-auto mr-2">新規作成</a>
       </div>
       <div class="row mt-3">
         <div class="col-md-5">

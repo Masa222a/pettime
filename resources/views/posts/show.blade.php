@@ -12,7 +12,7 @@
         <h5 class="mb-0">{{ $post->title }}</h5>
       </div>
       <div class="card-body">
-      @if(Auth::user()->id === $post->user_id)
+      @if(Auth::user() && Auth::user()->id === $post->user_id)
         <div class="btn-toolbar float-right">
           <div class="btn-group mr-2">
             <form action="{{ route('posts.destroy', $post->id) }}" method="post">

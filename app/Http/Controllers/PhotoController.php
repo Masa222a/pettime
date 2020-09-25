@@ -12,11 +12,11 @@ use Auth;
 use Storage;
 
 class PhotoController extends Controller
-{
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+{    
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     
     /**
      * Display a listing of the resource.
@@ -96,7 +96,7 @@ class PhotoController extends Controller
     public function show($id)
     {
         $photo = Photo::find($id);
-        
+        dd($id);
         $photocomments = PhotoComment::where('photo_id', $id)->get();
         
         return view('photos.show', compact('photo', 'photocomments'));
