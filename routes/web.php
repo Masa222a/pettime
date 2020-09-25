@@ -38,10 +38,9 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/pet/delete', 'PetController@delete');
 });
 
+Route::get('/photos/create', 'PhotoController@create')->middleware('auth');
 
 Route::resource('/photos', 'PhotoController', ['only' => ['index', 'show']]);
-
-Route::get('/img/add', 'PhotoController@create')->middleware('auth'); //toFix
 
 Route::resource('/photos', 'PhotoController', ['only' => [ 'store', 'edit', 'update', 'destroy']])->middleware('auth');
 
@@ -49,6 +48,8 @@ Route::resource('photocomments', 'PhotoCommentController', ['only' => ['index', 
 
 Route::resource('photocomments', 'PhotoCommentController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']])->middleware('auth');;
 
+
+Route::get('/posts/create', 'PostController@create')->middleware('auth');
 
 Route::resource('posts', 'PostController', ['only' => ['index', 'show']]);
 
