@@ -28,13 +28,13 @@
       
       <div class="row mt-3 pt-3">
         @foreach ($photos as $photo)
-          <div class="col-8 col-sm-6 col-md-3 mx-auto mb-3">
+          <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-auto mb-3">
             <a href="{{ route('photos.show', $photo->id) }}" class="card-block">
               <div class="card mb-3">
                 <h5 class="card-title mt-3 mx-auto" value="user_id">{{ $photo->user->name }}</h5>
                 <div class="card-body pt-2 mx-auto">
                   <div>
-                    <img src="{{ $photo->image_path }}" width="140px">
+                    <img src="{{ $photo->image_path }}" width="120px">
                   </div>
                 </div>
                 <div class="card-footer">

@@ -10,11 +10,11 @@
         </div>
         <div class="row">
             <div class="col-md-11 my-3">
-                <a href="{{ action('PetController@add') }}" role="button" class="btn btn-primary offset-md-2">新規作成</a>
+                <a href="{{ action('PetController@add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-8 mx-auto border">
+            <div class="col-12 col-md-12 mx-auto border">
                 <div class="row">
                     <table class="table">
                         <thead class="thead-light">

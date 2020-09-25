@@ -14,7 +14,7 @@
             
             <div class="row">
                 @foreach ($photos as $photo)
-                    <div class="col-8 col-sm-6 col-md-2 my-2 mx-auto">
+                    <div class="col-8 col-sm-6 col-md-6 col-lg-3 col-xl-2 my-2 mx-auto">
                         <a href="/photos/{{$photo->id}}">
                             <img src="{{ $photo->image_path }}" class="my-2" width="140">
                             <p class="mb-0">{{ $photo->user->name }}</p>
@@ -54,14 +54,14 @@
         <div class="box-account col-md-2 order-md-2 mx-auto ml-md-auto">
             <div class="row">
                 <div class=" mx-auto">
-                        <i class="fas fa-user fa-6x mt-3 ml-3"></i>
-                        <div class="list-group text-center">
-                            <p class="mt-3">{{ Auth::user()->name }}さん</p>
-                            <p><a href="{{ url('/pet') }}">ペット一覧</a></p>
-                            <p><a href="{{ url('/user') }}">プロフィール編集</a></p>
-                            {{-- hrefの引数で検索 --}}
-                            <p><a href="{{ action('UserController@delete', Auth::user()->id) }}" class="text-danger">アカウント削除</a></p>
-                        </div>
+                    <i class="fas fa-user fa-6x mt-3 ml-3"></i>
+                    <div class="list-group text-center">
+                        <p class="mt-3">{{ Auth::user()->name }}さん</p>
+                        <p><a href="{{ url('/pet') }}">ペット一覧</a></p>
+                        <p><a href="{{ url('/user') }}">プロフィール編集</a></p>
+                        {{-- hrefの引数で検索 --}}
+                        <p><a href="{{ action('UserController@delete', Auth::user()->id) }}" class="text-danger">アカウント削除</a></p>
+                    </div>
                 </div>
             </div>
         </div>
