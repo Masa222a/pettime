@@ -16,7 +16,7 @@
           <form action="{{ route('posts.index') }}" method="get">
             <div class="form-group row align-items-right">
               <div class="col-auto">
-            	  <input type="text" class="form-control ml-3" name="user_name" value="{{ $user_name }}" placeholder="ユーザー名">
+            	  <input type="text" class="form-control" name="user_name" value="{{ $user_name }}" placeholder="ユーザー名">
             	</div>
               <div class="col-auto">
                 @csrf
@@ -33,12 +33,33 @@
         <div class="card-header">
           <p class="card-title my-0">{{ $post->title }}</p>
         </div>
+        
         <div class="card-body">
           <p class="card-text">{{ $post->body }}</p>
-          
         </div>
-        <div class="card-footer text-muted text-right py-1">
-          <p class="my-auto">投稿者:{{ $post->user->name }}&emsp;投稿日時:{{ $post->created_at }}</p>
+        
+        <div class="card-footer py-1">
+          
+          <div class="btn-toolbar float-left">
+            <div class="btn-group mr-2">
+              @if ($post->users()->where('user_id', Auth::id())->exists())
+              <div class="col-md-3">
+                <form action="{{ route('unfavorites', $post) }}" method="POST">
+                  @csrf
+                <input type="submit" value="&#xf164;いいね取り消す" class="fas btn btn-danger btn-sm">
+                </form>
+              </div>
+              @else
+              <div class="col-md-3">
+                <form action="{{ route('favorites', $post) }}" method="POST">
+                  @csrf
+                  <input type="submit" value="&#xf164;いいね" class="fas btn btn-success btn-sm">
+                </form>
+              </div>
+              @endif
+            </div>
+          </div>
+          <p class="my-auto text-muted text-right">投稿者:{{ $post->user->name }}&emsp;投稿日時:{{ $post->created_at }}</p>
         </div>
       </div>
       </a>
@@ -47,3 +68,12 @@
   </div>
 </div>
 @endsection
+
+
+
+
+
+
+
+
+          

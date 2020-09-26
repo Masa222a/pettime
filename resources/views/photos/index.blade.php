@@ -15,7 +15,7 @@
           <form action="{{ route('photos.index') }}" method="get">
             <div class="form-group row align-items-right">
               <div class="col-auto">
-            	<input type="text" class="form-control ml-3" name="user_name" value="{{ $user_name }}" placeholder="ユーザー名">
+            	<input type="text" class="form-control" name="user_name" value="{{ $user_name }}" placeholder="ユーザー名">
             	</div>
               <div class="col-auto">
                 @csrf
@@ -26,7 +26,7 @@
         </div>
       </div>
       
-      <div class="row mt-3 pt-3">
+      <div class="row">
         @foreach ($photos as $photo)
           <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 mx-auto mb-3">
             <a href="{{ route('photos.show', $photo->id) }}" class="card-block">

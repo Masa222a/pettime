@@ -6,23 +6,25 @@
 
     <div class="container">
         <div class="row">
-            <h4 class="ml-3">ペット一覧</h4>
+            <h4>ペット一覧</h4>
         </div>
         <div class="row">
-            <div class="col-md-11 my-3">
+            <div class="col-md-12 my-3 pl-0">
                 <a href="{{ action('PetController@add') }}" role="button" class="btn btn-primary">新規作成</a>
             </div>
         </div>
         <div class="row">
             <div class="col-12 col-md-12 mx-auto border">
                 <div class="row">
-                    <table class="table">
+                    <table class="table mb-0">
                         <thead class="thead-light">
                             <tr>
                                 <th width="10%">ID</th>
                                 <th width="20%">名前</th>
                                 <th width="20%">種類</th>
                                 <th width="20%">性別</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

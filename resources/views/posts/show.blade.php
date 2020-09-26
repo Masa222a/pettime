@@ -14,7 +14,7 @@
       <div class="card-body">
       @if(Auth::user() && Auth::user()->id === $post->user_id)
         <div class="btn-toolbar float-right">
-          <div class="btn-group mr-2">
+          <div class="btn-group">
             <form action="{{ route('posts.destroy', $post->id) }}" method="post">
               @csrf
               {{ method_field('DELETE') }}

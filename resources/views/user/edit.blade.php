@@ -30,23 +30,19 @@
             </div>
             
             <div class="form-group row my-3">
-              <div class="col-md-9 pl-0">
-                <div class="form-group row">
-                  <label for="gender" class="col-md-3 col-form-label text-right ml-1">性別</label>
-                  <div class="col-md-3">
-                    <select class="form-control my-1 text-right" name="gender" id="gender">
-                      <option value="m">男性</option>
-                      <option value="f">女性</option>
-                      <option value="others">その他</option>
-                    </select>
-                  </div>
+              <label for="gender" class="col-md-2 col-form-label text-right ml-3" for="gender">性別</label>
+                <div class="col-md-2">
+                  <select class="form-control my-1 text-right" name="gender" id="gender">
+                    <option value="m">男性</option>
+                    <option value="f">女性</option>
+                    <option value="others">その他</option>
+                  </select>
                 </div>
-                @error('gender')
-                  <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                  </span>
-                @enderror
-              </div>
+              @error('gender')
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $message }}</strong>
+                </span>
+              @enderror
             </div>
             
             <div class="form-group row my-3">
