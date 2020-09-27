@@ -32,9 +32,9 @@
             <a href="{{ route('photos.show', $photo->id) }}" class="card-block">
               <div class="card mb-3">
                 <h5 class="card-title mt-3 mx-auto" value="user_id">{{ $photo->user->name }}</h5>
-                <div class="card-body pt-2 mx-auto">
+                <div class="card-body pt-2 mx-auto d-flex align-items-center justify-content-center" style="height:200px">
                   <div>
-                    <img src="{{ $photo->image_path }}" width="120px">
+                    <img src="{{ $photo->image_path }}" width="120px" style="max-height:190px;">
                   </div>
                 </div>
                 <div class="card-footer">
