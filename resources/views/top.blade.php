@@ -18,7 +18,7 @@
                         <a href="/photos/{{$photo->id}}">
                         <div class="d-flex align-items-center justify-content-center" style="height:200px; width:143px">
                             <div class="card-img-top">
-                                <img src="{{ $photo->image_path }}" class="my-2" width="140">                                
+                                <img src="{{ $photo->image_path }}" class="my-2" width="140" style="max-height:190px;">                                
                             </div>
                         </div>
 
