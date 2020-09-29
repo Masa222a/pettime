@@ -40,7 +40,7 @@
         
         <div class="card-footer py-1">
           
-          {{-- <div class="btn-toolbar float-left"> 
+          <div class="btn-toolbar float-left"> 
             <div class="btn-group mr-2">
               @if ($post->users()->where('user_id', Auth::id())->exists())
               <div class="col-md-3">
@@ -58,7 +58,7 @@
               </div>
               @endif
             </div>
-          </div> --}}
+          </div>
           
           <p class="my-auto text-muted text-right">投稿者:{{ $post->user->name }}&emsp;投稿日時:{{ $post->created_at }}</p>
         </div>
