@@ -61,7 +61,7 @@
         
     <!-- ログイン時のみユーザー画面 -->
     @auth
-        <div class="box-account col-md-2 order-md-2 mx-auto ml-md-auto mt-4">
+        <div class="box-account col-md-2 order-md-2 mx-auto ml-md-auto mt-4 border-secondary">
             <div class="row">
                 <div class=" mx-auto">
                     <i class="fas fa-user fa-6x mt-3 ml-3"></i>
