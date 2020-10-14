@@ -70,7 +70,7 @@
                         <p><a href="{{ url('/pet') }}">ペット一覧</a></p>
                         <p><a href="{{ url('/user') }}">プロフィール編集</a></p>
                         {{-- hrefの引数で検索 --}}
-                        <p><a href="{{ action('UserController@delete', Auth::user()->id) }}" class="text-danger">アカウント削除</a></p>
+                        <p><a href="{{ action('UserController@delete', Auth::user()->id) }}" class="text-danger" onclick='return confirm("削除しますか?");'>アカウント削除</a></p>
                     </div>
                 </div>
             </div>
