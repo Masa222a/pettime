@@ -60,4 +60,5 @@ Route::resource('postcomments', 'PostCommentController', ['only' => ['index', 's
 Route::resource('postcomments', 'PostCommentController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']])->middleware('auth');
 
 Route::post('/posts/{post}/favorites', 'FavoriteController@store')->name('favorites');
+
 Route::post('/posts/{post}/unfavorites', 'FavoriteController@destory')->name('unfavorites');
