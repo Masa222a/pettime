@@ -34,11 +34,16 @@ class FavoriteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Post $post)
+    public function store($id)
     {
+        $post = Post::find($id);
         $post->users()->attach(Auth::id());
-        
-        return redirect()->route('posts.index');
+        $count = $post->users()->count();
+        $result = true;
+        return response()->json([
+            'result' => $result,
+            'count' => $count,
+        ]);
     }
 
     /**
@@ -81,10 +86,36 @@ class FavoriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destory(Post $post)
+    public function destory($id)
     {
+        $post = Post::find($id);
         $post->users()->detach(Auth::id());
+        $count = $post->users()->count();
+        $result = false;
+        return response()->json([
+            'result' => $result,
+            'count' => $count,
+        ]);
+    }
+
+    public function count($id)
+    {
+        $post = Post::find($id);
+        $count = $post->users()->count();
+
+        return response()->json($count);
+    }
+    
+    public function hasfavorite($id)
+    {
+        $post = Post::find($id);
         
-        return redirect()->route('posts.index');
+        if($post->users()->where('user_id', Auth::id())->exists()) {
+            $result = true;    
+        } else {
+            $result = false;
+        }
+        
+        return response()->json($result);
     }
 }

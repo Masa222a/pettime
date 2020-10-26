@@ -59,6 +59,14 @@ Route::resource('postcomments', 'PostCommentController', ['only' => ['index', 's
 
 Route::resource('postcomments', 'PostCommentController', ['only' => ['create', 'store', 'edit', 'update', 'destroy']])->middleware('auth');
 
-Route::post('/posts/{post}/favorites', 'FavoriteController@store')->name('favorites');
+Route::get('/posts/{post}/favorites', 'FavoriteController@store')->name('favorites');
 
-Route::post('/posts/{post}/unfavorites', 'FavoriteController@destory')->name('unfavorites');
+Route::get('/posts/{post}/unfavorites', 'FavoriteController@destory')->name('unfavorites');
+
+Route::get('/posts/{post}/countfavorites', 'FavoriteController@count');
+
+Route::get('posts/{post}/hasfavorites', 'FavoriteController@hasfavorite');
+
+// Route::post('/posts/{post}/favorites', 'FavoriteController@store')->name('favorites');
+
+// Route::post('/posts/{post}/unfavorites', 'FavoriteController@destory')->name('unfavorites');
